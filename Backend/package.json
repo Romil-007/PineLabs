@@ -4,7 +4,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "dev": "nodemon index.js"
+        "dev": "nodemon server.js"
     },
     "author": "Romil Pandey",
     "license": "ISC",
@@ -16,6 +16,7 @@
         "express": "^4.21.1",
         "graphql": "^16.9.0",
         "graphql-http": "^1.22.3",
+        "joi": "^17.13.3",
         "json-web-token": "^3.2.0",
         "mongoose": "^8.8.3",
         "neo4j-driver": "^5.27.0"
