@@ -3,7 +3,10 @@ import joi from "joi";
 
 // Joi Validation Schema
 const validationSchema = joi.object({
-    merchant_id: joi.string().hex().length(24).required(), // ObjectId reference from Merchants collection (MongoDB ObjectId format)
+    merchant_id: joi
+        .string()
+        .pattern(/^[a-fA-F0-9]{24}$/)
+        .required(), // ObjectId reference from Merchants collection (MongoDB ObjectId format)
     name: joi.string().min(3).max(50).required(),
     phone: joi
         .string()
