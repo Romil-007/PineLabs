@@ -42,7 +42,7 @@ export const validateCustomer = (customerData) => {
     const validationResult = validationSchema.validate(customerData);
     if (validationResult.error) {
         const err = new Error(
-            `VALIDATION ERROR  :  ${validationResult.error.details[0].message}`
+            `CUSTOMER VALIDATION ERROR  :  ${validationResult.error.details[0].message}`
         );
 
         err.status = 400;

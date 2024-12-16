@@ -2,20 +2,22 @@ import mongoose from "mongoose";
 import joi from "joi";
 
 const validationSchema = joi.object({
-    name: joi.string().min(3).max(20).required(),
-    email: joi.string().alphanum().min(3).required(), //Unique
+    businessName: joi.string().min(2).max(40).required(),
+    email: joi.string().email().required(), //Unique
     phone: joi
         .string()
         .pattern(/^\d{10}$/)
+        .required(),
+    password: joi
+        .string()
+        .pattern(
+            /^(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z0-9!@#$%^&*(),.?":{}|<>]{8,}$/
+        )
         .required(),
     storeDetails: joi
         .object({
             store_name: joi.string().required(),
             address: joi.string().required(),
-            location: joi.object({
-                lat: joi.number().required(),
-                lon: joi.number().required(),
-            }),
         })
         .required(),
     payementConfig: {
@@ -32,16 +34,13 @@ const validationSchema = joi.object({
 
 const merchantSchema = new mongoose.Schema(
     {
-        name: { type: String, required: true },
+        businessName: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         phone: { type: String, required: true },
+        password: { type: String, required: true },
         storeDetails: {
             store_name: { type: String, required: true },
             address: { type: String, required: true },
-            location: {
-                lat: { type: Number, required: true },
-                lon: { type: Number, required: true },
-            },
         },
         paymentConfig: {
             upi_id: {
@@ -68,8 +67,10 @@ export const validateMerchant = (merchantData) => {
     const validationResult = validationSchema.validate(merchantData);
     if (validationResult.error) {
         const err = new Error(
-            `VALIDATION ERROR  :  ${validationResult.error.details[0].message}`
+            `MERCHANT VALIDATION ERROR  :  ${validationResult.error.details[0].message}`
         );
+
+        err.details = validationResult.error.details[0].message;
 
         err.status = 400;
 

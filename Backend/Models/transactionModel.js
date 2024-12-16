@@ -92,7 +92,7 @@ export const validateTransaction = (transactionData) => {
     const validationResult = validationSchema.validate(transactionData);
     if (validationResult.error) {
         const err = new Error(
-            `VALIDATION ERROR: ${validationResult.error.details[0].message}`
+            `TRANSACTION VALIDATION ERROR: ${validationResult.error.details[0].message}`
         );
         err.status = 400;
         throw err;

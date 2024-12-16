@@ -50,7 +50,7 @@ export const validateInventoryLog = (inventoryData) => {
     const validationResult = validationSchema.validate(inventoryData);
     if (validationResult.error) {
         const err = new Error(
-            `VALIDATION ERROR: ${validationResult.error.details[0].message}`
+            `INVENTORY VALIDATION ERROR: ${validationResult.error.details[0].message}`
         );
         err.status = 400;
         throw err;

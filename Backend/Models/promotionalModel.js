@@ -55,7 +55,7 @@ export const validatePromotion = (promotionData) => {
     const validationResult = validationSchema.validate(promotionData);
     if (validationResult.error) {
         const err = new Error(
-            `VALIDATION ERROR: ${validationResult.error.details[0].message}`
+            `PROMOTIONAL VALIDATION ERROR: ${validationResult.error.details[0].message}`
         );
         err.status = 400;
         throw err;

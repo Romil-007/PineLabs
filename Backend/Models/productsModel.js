@@ -51,7 +51,7 @@ export const validateProduct = (productData) => {
     const validationResult = validationSchema.validate(productData);
     if (validationResult.error) {
         const error = new Error(
-            `VALIDATION ERROR: ${validationResult.error.details[0].message}`
+            `PRODUCT VALIDATION ERROR: ${validationResult.error.details[0].message}`
         );
         error.status = 400;
         throw error;
